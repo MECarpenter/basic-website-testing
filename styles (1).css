@@ -288,46 +288,61 @@ footer a:focus {
 
 
      /* --- STABILIZE CENTER COLUMN ON ALL PAGES --- */
+/* 1) content width that steps at your sizes */
+:root { --content: 230px; }                /* mobile artboard */
+
 header .wrap,
 main,
 footer > div{
-  display:block;
-  width:min(100%, 360px);
-  margin-inline:auto;          /* centers left/right */
+  max-width: var(--content);
+  margin-inline: auto; 
 }
 
-/* step up widths at breakpoints */
-@media (min-width:500px){
-  header .wrap, main { width:min(100%, 500px); }
-}
-@media (min-width:600px){
-  header .wrap, main { width:min(100%, 680px); }
-}
-@media (min-width:700px){
-  footer > div { width:min(100%, 700px); }
-}
-@media (min-width:950px){
-  header .wrap, main { width:min(100%, 900px); }
-}
+/*tablet + desktop widths */
+@media (min-width: 768px){  :root{ --content: 768px; } }
+@media (min-width: 1366px){ :root{ --content: 1366px; } }
 
-/* --- NEVER GRID THE OUTER HEADER --- */
-header{ display:block; }   /* overrides any earlier `header{display:grid}` */
-
-/* --- HEADER LAYOUT: use the INNER WRAPPER --- */
-/* ≥500px: two cols (logo | title), nav on row 2 full width */
-@media (min-width:500px){
+@media (min-width: 768px){
   header .wrap{
-    display:grid;                      /* overrides mobile flex */
-    grid-template-columns: 1fr 3fr;
-    align-items:center;
+    display: grid;
+    grid-template-columns: 1fr 3fr;      
+  align-items: center;
   }
-  #logo{ grid-column:1; grid-row:1; justify-self:center; }
-  #logo img{ width:90px; height:auto; margin:0; }
-  header h1{ grid-column:2; grid-row:1; text-align:left; margin:0; }
-  header nav{ grid-column:1 / -1; grid-row:2; width:100%; }
+
+#logo{ grid-column: 1; grid-row: 1; justify-self: center; }
+  #logo img{ width: 90px; height: auto; margin: 0; }
+  header h1{ grid-column: 2; grid-row: 1; text-align: left; margin: 0; }
+  header nav{ grid-column: 1 / -1; grid-row: 2; width: 100%; }
 }
 
-/* ≥950px: three cols (logo | title | nav) */
+
+
+@media (min-width: 768px){
+  #aboutPlants > div{
+    display: grid; grid-template-columns: 1fr 2fr;
+    align-items: center; margin: 0 auto;
+  }
+  #contactUs > div{
+    display: grid; grid-template-columns: 2fr 1fr;
+    align-items: center; margin: 0 auto;
+  }
+
+#aboutPlants h3, #contactUs h3{
+    grid-column: 1 / -1; grid-row: 1; padding-bottom: 0; text-align: left;
+  }
+  #aboutPlants a{ grid-column: 1; grid-row: 2; justify-self: center; }
+  #aboutPlants p{ grid-column: 2; grid-row: 2; text-align: left; }
+  #contactUs p{ grid-column: 1; grid-row: 2; text-align: left; }
+  #contactUs a{ grid-column: 2; grid-row: 2; justify-self: center; }
+}
+
+  @media (min-width: 768px){
+  footer > div{
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1rem; padding-bottom: 1rem;
+  }
+}
+/* three cols */
 @media (min-width:950px){
   header .wrap{ grid-template-columns: 1fr 2fr 3fr; }
   #logo{ grid-column:1; justify-self:start; }
@@ -335,7 +350,7 @@ header{ display:block; }   /* overrides any earlier `header{display:grid}` */
   header nav{ grid-column:3 / -1; max-width:600px; margin:0 auto; }
 }
 
-/* --- PANELS (tablet+) --- */
+/* --- PANELS  --- */
 @media (min-width:600px){
   #aboutPlants > div{
     display:grid; grid-template-columns:1fr 2fr;
@@ -352,7 +367,7 @@ header{ display:block; }   /* overrides any earlier `header{display:grid}` */
   #contactUs a{ grid-column:2; grid-row:2; justify-self:center; }
 }
 
-/* --- FOOTER (≥700px two columns) --- */
+/* --- FOOTER --- */
 @media (min-width:700px){
   footer > div{
     display:grid; grid-template-columns:1fr 1fr;
